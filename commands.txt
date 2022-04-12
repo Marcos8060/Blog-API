@@ -1,0 +1,3 @@
+pip install coverage
+coverage run --omit='*/virtual/*' manage.py test
+coverage html
