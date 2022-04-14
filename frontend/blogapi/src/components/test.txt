@@ -1,0 +1,32 @@
+const history = useNavigate();
+    const initialFormData = Object.freeze({  
+        email: '',
+        username: '',
+        password: ''
+    })
+
+    const [formData , updateFormData ] = useState(initialFormData)
+
+
+    const handleChange = (e) =>{
+        updateFormData({
+            ...formData,
+            // trimming any white space
+            [e.target.name]: e.target.value.trim(),
+        });
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+
+        axiosInstance.post(`user/register/`,{
+            email: formData.email,
+            user_name: formData.username,
+            password : formData.password
+        })
+        .then((res) => {
+            history.push('/login');
+            console.log(res);
+            console.log(res.data)
+        });
+    }

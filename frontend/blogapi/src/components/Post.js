@@ -10,7 +10,7 @@ function Post ({blogs}) {
     <div className="container-fluid">
     <div className='row'>
         {blogs.map((blog) =>(
-            <div className="col-md-4">
+            <div key={blog.id} className="col-md-4">
               <h3>{blog.title}</h3>
               <p>{blog.excerpt}</p>
               <p>{blog.content.substr(0,70)}...</p>
