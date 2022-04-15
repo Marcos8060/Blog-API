@@ -21,6 +21,7 @@ class PostList(viewsets.ModelViewSet):
     permission_classes = [PostUserWritePermission]
     serializer_class = PostSerializer
 
+    # detail view
     def get_object(self, queryset= None, **kwargs):
         item = self.kwargs.get('pk')
         return get_object_or_404(Post, title=item)
