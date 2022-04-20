@@ -13,7 +13,7 @@ function App() {
     const fetchData = async () => {
       const result = await axios(url);
       setBlogs(result.data);
-      console.log(result.data);
+      // console.log(result.data);
       setisLoading(false);
     };
     fetchData();

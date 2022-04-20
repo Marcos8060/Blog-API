@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Register from './components/Register';
 import Login from './components/Login';
 import Logout from './components/Logout'
+import Single from './components/Single';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -20,6 +21,7 @@ root.render(
             <Route exact path='/register' element={< Register/>}></Route>
             <Route exact path='/login' element={< Login />}></Route>
             <Route exact path='/logout' element={< Logout />}></Route>
+            <Route exact path='/post/:slug' element={< Single />}></Route>
         </Routes>
     </React.StrictMode>
 </Router>
