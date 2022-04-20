@@ -9,6 +9,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Logout from './components/Logout'
 import Single from './components/Single';
+import Search from './components/Search';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -22,6 +23,7 @@ root.render(
             <Route exact path='/login' element={< Login />}></Route>
             <Route exact path='/logout' element={< Logout />}></Route>
             <Route exact path='/post/:slug' element={< Single />}></Route>
+            <Route exact path='/search' element={< Search />}></Route>
         </Routes>
     </React.StrictMode>
 </Router>

@@ -51,13 +51,14 @@ class PostUserWritePermission(BasePermission):
 
 
 class PostList(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
 
     # filter based on the owner of the post
-    def get_queryset(self):
-        user = self.request.user
-        return Post.objects.filter(author=user)
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return Post.objects.filter(author=user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView,PostUserWritePermission):

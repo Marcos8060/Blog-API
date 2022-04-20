@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -6,6 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import {useNavigate} from 'react-router-dom'
+import SearchBar from "material-ui-search-bar";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +57,17 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Header() {
+    let history = useNavigate();
+    const [data,setData] = useState({search:''})
     const classes = useStyles();
+    
+    const goSearch = (e) =>{
+      history({
+        pathname : '/search/',
+        search : '?search=' + data.search,
+      });
+      window.location.reload();
+    }
   return (
       <>
         <CssBaseline />
@@ -63,6 +76,11 @@ function Header() {
         <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
           Blog
         </Typography>
+        <SearchBar
+          value={data.search}
+          onChange={(newValue) => setData({ search: newValue })}
+          onRequestSearch={() => goSearch(data.search)}
+        />
         <nav>
           <Link variant="button" color="textPrimary" href="/register" className={classes.link}>
             Register
