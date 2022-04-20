@@ -1,11 +1,12 @@
+from operator import ge
 from django.shortcuts import get_object_or_404
 from requests import request
 from rest_framework import generics
 from blog.models import *
 from .serializers import *
-from rest_framework.permissions import IsAdminUser,DjangoModelPermissionsOrAnonReadOnly,BasePermission,SAFE_METHODS,AllowAny,IsAuthenticated
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly,BasePermission,SAFE_METHODS,IsAuthenticated
 from rest_framework import viewsets
-from rest_framework.response import Response
+from rest_framework import permissions
 from rest_framework import filters
 
 # only allows the owner of the post to make changes
@@ -76,5 +77,29 @@ class PostListDetailFilter(generics.ListAPIView):
     # ['^slug'] starts-with search functionality
     # ['@']  full text search works best with postgresql
     # ['$']  regex search
+
+
+class CreatePost(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class AdminPostDetail(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    
+
+class EditPost(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class DeletePost(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
