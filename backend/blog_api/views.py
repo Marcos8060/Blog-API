@@ -66,4 +66,14 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView,PostUserWritePermission):
     serializer_class = PostSerializer
 
 
-class PostListDetailFilter(generics.ListAPIView)
+class PostListDetailFilter(generics.ListAPIView):
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['=title']  #exact match search
+    # ['^slug'] starts-with search functionality
+    # ['@']  full text search works best with postgresql
+    # ['$']  regex search
+
+
